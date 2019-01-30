@@ -26,30 +26,79 @@
 		<![endif]-->
 		<?php wp_head(); ?>
 	</head>
-	<body>
-		<header>
-			<nav class="navbar navbar-default" role="navigation">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#"></a>
-					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-					  </button>
-				</div>
-					<?php
-						wp_nav_menu( array(
-							'menu'                    => 'primary',
-							'theme_location'      => 'primary',
-							'depth'                    => 2,
-							'container'              => 'div',
-							'container_class'    => 'collapse navbar-collapse',
-							'container_id'         => 'navbar-collapse-1',
-							'menu_class'          => 'nav navbar-nav',
-							'fallback_cb'           => 'wp_bootstrap_navwalker::fallback',
-							'walker'                  => new wp_bootstrap_navwalker())
-						);
-					?>
+	<body <?php body_class(); ?>>
+		<header class="header">
+			<nav class="navbar navbar-default">
+			    <div class="container align-center-v">
+			        <div class="navbar-header">
+			            <div class="logo">
+			                <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+			                    <img src="<?php echo get_theme_file_uri(); ?>/images/logo.png" class="img-responsive" alt="">
+			                </a>
+			            </div><!-- /logo -->
+			
+			            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+			                <span class="icon-bar"><span class="inner"></span></span>
+						  	<span class="icon-bar"><span class="inner"></span></span>
+						  	<span class="icon-bar"><span class="inner"></span></span>
+			            </button>
+			        </div>
+
+			        <div class="navbar-collapse collapse">
+			            <?php 
+					  		wp_nav_menu( array(
+	                            'menu'               => 'Primary menu',
+	                            'theme_location'     => 'menu-1',
+	                            'depth'              => 2,
+	                            'container'          => 'false',
+	                            'menu_class'         => 'nav navbar-nav navbar-right',
+	                            'menu_id'            => '',
+	                            'fallback_cb'        => 'wp_bootstrap_navwalker::fallback',
+	                            'walker'             => new wp_bootstrap_navwalker(),
+	                        ));
+	                    ?>
+
+			            <ul class="social-media list-inline">
+			        		<li><a href="#" target="_blank"><i class="icon-facebook"></i></a></li>
+			        		<li><a href="#" target="_blank"><i class="icon-linkedin"></i></a></li>
+			        		<li><a href="#" target="_blank"><i class="icon-twitter"></i></a></li>
+			        	</ul>
+
+			        	<ul class="contacts list-inline">
+			            	<li><a href="tel:(508) 580-4626"><i class="icon-phone"></i>(508) 580-4626</a></li>
+			            	<li><a href="mailto:info@gencondb.com"><i class="icon-envelope"></i>info@gencondb.com</a></li>
+			            </ul>
+			        </div><!-- /navbar-collapse -->
+			    </div><!-- /container -->
 			</nav>
-		</header>									
+		</header><!-- /header -->
+		<?php if (!is_front_page() && !is_page_template('t_about.php') && !is_page_template('t_services.php')): ?>
+		<div class="header_gutter"></div>
+		<?php endif; ?>
+
+		<?php if (!is_home() && !is_front_page() && !is_page_template('t_contact.php') && !is_page_template('t_projects.php')): ?>
+		<section class="banner banner-about align-center-v coverbg" style="background-image: url(<?php echo get_theme_file_uri(); ?>/images/banner-about.jpg);">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="content text-center">
+							<h1 class="title">We Deliver Results</h1>
+							<p>At GenCon, we combine energy, innovation and proven processes to deliver exceptional results to our partners in business – every job, every day.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!-- /banner -->
+		<?php endif; ?>
+
+		<?php if (!is_front_page()): ?>
+		<section class="breadcrumb-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<?php echo gencon_breadcrumb(); ?>
+					</div>
+				</div>
+			</div>
+		</section><!-- /breadcrumb -->
+		<?php endif; ?>
