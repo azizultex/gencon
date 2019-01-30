@@ -9,7 +9,7 @@ get_header(); ?>
 		<section class="contact">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="col-md-6 col-sm-12 col-xs-12">
 						<div class="section-title">
 							<h1 class="title">Get in Touch</h1>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend, elit at luctus sodales.</p>
@@ -48,11 +48,11 @@ get_header(); ?>
 						
 					</div>
 
-					<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="col-md-6 col-sm-12 col-xs-12">
 						<div class="contact-form">
 							<h5>We look forward to Hearing from you.</h5>
 
-							<img src="<?php echo get_theme_file_uri(); ?>/images/contact.png" class="img-responsive" alt="">
+							<?php echo do_shortcode('[gravityform id="1" title="false" description="false" tabindex="10" ajax="false"]'); ?>
 						</div>
 					</div>
 				</div>

@@ -137,15 +137,27 @@ input[type="tel"],
 input[type="search"],
 select,
 textarea {
+	width: 100% !important;
+	color: #062560 !important;
+	font-size: 14px !important;
+	line-height: 24px !important;
+	padding: 8px 15px !important;
+	border-radius: 6px !important;
+	background: $white !important;
+	font-family: $caslon !important;
+	border: 1px solid #DDE1E3 !important;
 	@include transition(all 0.5s ease);
+	@include placeholder($base, 14px, 400); 
 
 	&:hover, &:focus {
 		outline: 0;
 	}
 }
 
-label {
-
+select {
+	color: $white !important; 
+	background: $base !important;
+	padding: 11.5px 15px !important;
 }
 
 .container {
@@ -314,6 +326,10 @@ HEADER STYLES
 				-ms-flex-positive: 1;    
 				flex-grow: 1;
 
+				&:before, &:after {
+			    	content: none;
+			    }
+
 				.navbar-brand {
 					padding-top: 0;
 					height: inherit;
@@ -333,6 +349,10 @@ HEADER STYLES
 			display: flex !important;
 			align-items: center;
 			position: relative;
+
+			&:before, &:after {
+		    	content: none;
+		    }
 
 			.contacts {
 				order: -1;
@@ -448,6 +468,10 @@ HEADER STYLES
 			font-size: 10px !important;
 			@include align-center;
 
+			&:before, &:after {
+		    	content: none;
+		    }
+
 			i {
 
 				&.icon-facebook, &.icon-twitter {
@@ -462,7 +486,7 @@ HEADER STYLES
 BREADCRUMB STYLES
 ***********************************/
 .breadcrumb-wrapper {
-	padding: 40px 0;
+	padding: 30px 0 40px;
 
 	.breadcrumb {
 		margin: 0;
@@ -509,6 +533,7 @@ BREADCRUMB STYLES
 BANNER STYLES
 ***********************************/
 .banner {
+	z-index: 1;
 	height: 560px;
 	padding: 80px 0 0;
 	position: relative;
@@ -516,6 +541,7 @@ BANNER STYLES
 	&:before {
 		top: 0;
 		left: 0;
+		z-index: -1;
 		content: '';
 		width: 100%;
 		height: 100%;
@@ -548,8 +574,11 @@ BANNER STYLES
 			font-family: $garamond;
 		}
 	}
+}
 
-	&.banner-about {
+.page-template-t_about {
+
+	.banner {
 		
 		.content {
 
@@ -577,9 +606,14 @@ BANNER STYLES
 
     left: 0;
     right: 0;
+    z-index: 2;
 	bottom: 20px;
 	margin: 0 auto;
 	position: absolute;
+
+	&:before, &:after {
+    	content: none;
+    }
 
 	&:hover, &:focus {
 		background: $base;
@@ -613,6 +647,10 @@ SERVICES STYLES
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
+
+			&:before, &:after {
+		    	content: none;
+		    }
 
 			i {
 				color: $base;
@@ -655,6 +693,10 @@ SERVICES STYLES
 	@include align-center('vertical');
 	flex-direction: column;
 	justify-content: space-between;
+
+	&:before, &:after {
+    	content: none;
+    }
 
 	&.active {
 		background: $white;
@@ -754,6 +796,10 @@ PROJECT STYLES
 		text-align: center;
 		position: absolute;
 		@include align-center;
+
+		&:before, &:after {
+	    	content: none;
+	    }
 
 		.location {
 			font-size: 18px;
@@ -905,12 +951,20 @@ PROJECT STYLES
     margin-bottom: 30px;
     @include align-center('vertical');
 
+    &:before, &:after {
+    	content: none;
+    }
+
 	.icon {
 		color: $base;
 		font-size: 82px;
 		width: 82px;
 		margin-right: 18px;
 		@include align-center;
+
+		&:before, &:after {
+	    	content: none;
+	    }
 	}
 
 	.text {
@@ -1469,6 +1523,76 @@ NEWS STYLES
 	}
 }
 
+.blog-pagination {
+	margin: 15px 0;
+	text-align: center;
+
+	.controler {
+    	margin: 0 20px;
+		color: #418173;
+		font-size: 19px;
+		line-height: 24px;
+		font-family: 'Arial';
+		background: transparent;
+		@include align-center;
+    	display: inline-flex;
+    	@include transition(all 0.3s);
+
+    	&:hover, &:focus {
+    		color: $base;
+    	}
+	}
+
+	.pagination {
+		margin: 0;
+		border-radius: 0;
+
+		.screen-reader-text {
+			display: none;
+		}
+
+		.page-numbers {
+			width: 45px;
+			height: 30px;
+			color: $black;
+			border: 1px solid #E0E0E0;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+
+			i {
+
+				&:before {
+					font-size: 8px;
+				}
+			}
+
+			&.prev {
+
+				i {
+					transform: rotate(90deg);
+				}
+			}
+
+			&.next {
+
+				i {
+					transform: rotate(-90deg);
+				}
+			}
+
+			&:before, &:after {
+				content: none;
+			}
+
+			&.current, &.dots, &:hover, &:focus {
+				color: $white;
+				background: $base;
+			}
+		}
+	}
+}
+
 /***********************************
 COMMUNITY-TEAM STYLES
 ***********************************/
@@ -1573,9 +1697,10 @@ CONTACT STYLES
 	}
 
 	.contact-form {
-		padding: 25px 23px;
+		overflow: hidden;
 		border-radius: 6px;
 		background: #FAFAFA;
+		padding: 25px 23px;
 
 		h5 {
 			margin-bottom: 22px;
@@ -1621,6 +1746,43 @@ CONTACT STYLES
 .gform_wrapper {
 	margin: 0 !important;
 
+	.top_label {
+
+		div.ginput_container {
+			line-height: 0;
+			margin-top: 0 !important;
+		}
+	}
+
+	&.gform_validation_error {
+
+		.gform_body {
+
+			.gform_fields {
+
+				.gfield {
+
+					&.gfield_error {
+						padding-bottom: 5px;
+						padding-top: 5px;
+
+						&:not(.gf_left_half):not(.gf_right_half) {
+							max-width: 100% !important;
+						}
+
+						.ginput_container {
+							margin-top: 0 !important;
+						}
+					}
+				}
+			}
+		}
+
+		.gform_footer {
+		    margin-top: -95px !important;
+		}
+	}
+
 	form {
 
 		.gform_body {
@@ -1628,12 +1790,13 @@ CONTACT STYLES
 			.gform_fields {
 
 				.gfield {
-					margin-top: 23px;
+					padding-right: 0;
+					margin-top: 16px;
 
 					&.google_recpatcha {
-						margin-top: 18px;
 						float: right;
-    					padding-right: 175px;
+						margin-top: 18px;
+    					padding-right: 130px;
 						-webkit-transform: scale(0.77);
 						-moz-transform: scale(0.77);
 						-ms-transform: scale(0.77);
@@ -1654,7 +1817,27 @@ CONTACT STYLES
 						margin-top: 0;
 					}
 
-					label.gfield_label, .gfield_required {
+					.ginput_container_select {
+						position: relative;
+
+						&:before {
+							right: 23px;
+							content: '';
+							color: $white;
+							font-size: 8px;
+							line-height: 8px;
+							position: absolute;
+							pointer-events: none;
+							top: calc(50% - 5px);
+							font-family: 'gencon';
+						}
+
+						select {
+							@include appearance;
+						}
+					}
+
+					label, label.gfield_label, .gfield_required {
 					    display: none !important;
 					}
 
@@ -1668,8 +1851,8 @@ CONTACT STYLES
 						@include letter-spacing(125, 10);
 					}
 
-					textarea.medium {
-						height: 100px;
+					textarea.small {
+						height: 84px !important;
 					}
 
 					.gfield_description {
@@ -1693,18 +1876,27 @@ CONTACT STYLES
 		.gform_footer {
 			float: right;
 		    margin: 0 !important;
+		    padding: 0 !important;
 			width: inherit !important;
-		    padding: 0 16px 0 0 !important;
-		    margin-top: -78px !important;
+		    margin-top: -70px !important;
 
 			.btn {
-				width: 208px;
-				max-width: 208px;
-				padding: 18.5px 15px;
-				background: #23275E;
+				outline: 0;
+				z-index: 1;
+				width: 174px;
+				font-size: 12px;
+				font-weight: 700;
+				line-height: 21px;
+				font-family: $mont;
+
+				max-width: 174px;
+				background: $black;
+				position: relative;
+				padding: 9.5px 15px;
+				text-transform: uppercase;
 
 				&:hover, &:focus {
-					
+					background: $base;
 				}
 			}
 		}

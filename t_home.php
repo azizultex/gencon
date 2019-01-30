@@ -4,19 +4,6 @@ Template Name: Home
 */
 get_header(); ?>
 
-	<section class="banner banner-home align-center-v coverbg" style="background-image: url(<?php echo get_theme_file_uri(); ?>/images/banner.jpg);">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
-					<div class="content text-center">
-						<h1 class="title">Design. Build. Maintain.</h1>
-						<p>We Combine Energy, Innovation and Proven Processes to Deliver Exceptional Results</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section><!-- /banner -->
-
 	<div class="container sd">
 		<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12 text-center">

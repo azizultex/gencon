@@ -4,110 +4,59 @@
 
 		<section class="news-page-main">
 			<div class="container">
+				<?php $header_title = get_field('page_header_title', getPageID()); if ($header_title): ?>
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="section-title text-center">
-							<h4 class="title">News & Updates</h4>
+							<h4 class="title"><?php echo $header_title; ?></h4>
 						</div>
 					</div>
 				</div>
+				<?php endif; ?>
 
 				<div class="row eq-height justify-content-center">
+					<?php if (have_posts()): while(have_posts()): the_post(); ?>
 					<div class="col-md-4 col-sm-6 col-xs-6 col">
-						<article id="post-" class="blog-post">
+						<article id="post-<?php the_ID(); ?>" <?php post_class('blog-post'); ?>>
 							<div class="media">
-								<a href="single-news.html">
-									<img src="<?php echo get_theme_file_uri(); ?>/images/news-1.jpg" class="img-responsive" alt="">
+								<a href="<?php the_permalink(); ?>">
+									<?php if (has_post_thumbnail()): ?>
+										<?php the_post_thumbnail('blog-post', array('class' => 'img-responsive')); ?>
+									<?php else: ?>
+										<img src="<?php echo get_theme_file_uri(); ?>/images/blog-post-placeholder.jpg" class="img-responsive" alt="">
+									<?php endif; ?>
 								</a>
 							</div>
 
 							<div class="content">
-								<span class="date">July 6, 2016</span>
-								<a href="single-news.html"><h5 class="title">GenCon, Inc. Celebrates National Safety Week</h5></a>
-								<a href="single-news.html" class="read-more">Keep Reading</a>
+								<a href="<?php $archive_year = get_the_time('Y'); $archive_month = get_the_time('m'); $archive_day = get_the_time('d'); echo get_day_link( $archive_year, $archive_month, $archive_day); ?>"><span class="date"><?php echo get_the_date(); ?></span></a>
+								<a href="<?php the_permalink(); ?>"><h5 class="title"><?php the_title(); ?></h5></a>
+								<a href="<?php the_permalink(); ?>" class="read-more"><?php _e('Keep Reading', 'gencon'); ?></a>
 							</div>
 						</article>
 					</div><!-- /blog-post -->
+					<?php endwhile; else: ?>
+						<div class="entry-content col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 30px">
+					        <h5 class="no-content text-center"><?php _e('Not found posts!!!', 'gencon'); ?></h5>
+					    </div>
+					<?php endif; ?>
+				</div>
 
-					<div class="col-md-4 col-sm-6 col-xs-6 col">
-						<article id="post-" class="blog-post">
-							<div class="media">
-								<a href="single-news.html">
-									<img src="<?php echo get_theme_file_uri(); ?>/images/news-2.jpg" class="img-responsive" alt="">
-								</a>
-							</div>
-
-							<div class="content">
-								<span class="date">July 6, 2016</span>
-								<a href="single-news.html"><h5 class="title">GenCon, Inc. Hands Over Finished Fluoroscopy Renovation Project for BI – Milton</h5></a>
-								<a href="single-news.html" class="read-more">Keep Reading</a>
-							</div>
-						</article>
-					</div><!-- /blog-post -->
-
-					<div class="col-md-4 col-sm-6 col-xs-6 col">
-						<article id="post-" class="blog-post">
-							<div class="media">
-								<a href="single-news.html">
-									<img src="<?php echo get_theme_file_uri(); ?>/images/news-3.jpg" class="img-responsive" alt="">
-								</a>
-							</div>
-
-							<div class="content">
-								<span class="date">July 6, 2016</span>
-								<a href="single-news.html"><h5 class="title">GenCon, Inc. Celebrates National Safety Week</h5></a>
-								<a href="single-news.html" class="read-more">Keep Reading</a>
-							</div>
-						</article>
-					</div><!-- /blog-post -->
-
-					<div class="col-md-4 col-sm-6 col-xs-6 col">
-						<article id="post-" class="blog-post">
-							<div class="media">
-								<a href="single-news.html">
-									<img src="<?php echo get_theme_file_uri(); ?>/images/news-4.jpg" class="img-responsive" alt="">
-								</a>
-							</div>
-
-							<div class="content">
-								<span class="date">July 6, 2016</span>
-								<a href="single-news.html"><h5 class="title">GenCon, Inc. Hands Over Finished Fluoroscopy Renovation Project for BI – Milton</h5></a>
-								<a href="single-news.html" class="read-more">Keep Reading</a>
-							</div>
-						</article>
-					</div><!-- /blog-post -->
-
-					<div class="col-md-4 col-sm-6 col-xs-6 col">
-						<article id="post-" class="blog-post">
-							<div class="media">
-								<a href="single-news.html">
-									<img src="<?php echo get_theme_file_uri(); ?>/images/news-3.jpg" class="img-responsive" alt="">
-								</a>
-							</div>
-
-							<div class="content">
-								<span class="date">July 6, 2016</span>
-								<a href="single-news.html"><h5 class="title">GenCon, Inc. Celebrates National Safety Week</h5></a>
-								<a href="single-news.html" class="read-more">Keep Reading</a>
-							</div>
-						</article>
-					</div><!-- /blog-post -->
-
-					<div class="col-md-4 col-sm-6 col-xs-6 col">
-						<article id="post-" class="blog-post">
-							<div class="media">
-								<a href="single-news.html">
-									<img src="<?php echo get_theme_file_uri(); ?>/images/news-1.jpg" class="img-responsive" alt="">
-								</a>
-							</div>
-
-							<div class="content">
-								<span class="date">July 6, 2016</span>
-								<a href="single-news.html"><h5 class="title">GenCon, Inc. Celebrates National Safety Week</h5></a>
-								<a href="single-news.html" class="read-more">Keep Reading</a>
-							</div>
-						</article>
-					</div><!-- /blog-post -->
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="blog-pagination">
+							<?php 
+								the_posts_pagination( 
+									array( 
+										'mid_size'  => 2,
+										'screen_reader_text' => ' ',
+										'prev_text' => __( '<i class="icon-angle-down"></i>', 'gencon' ),
+										'next_text' => __( '<i class="icon-angle-down"></i>', 'gencon' ),
+									) 
+								); 
+							?>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section><!-- /latest-news -->

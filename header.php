@@ -33,7 +33,11 @@
 			        <div class="navbar-header">
 			            <div class="logo">
 			                <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-			                    <img src="<?php echo get_theme_file_uri(); ?>/images/logo.png" class="img-responsive" alt="">
+			                	<?php $logo = get_field('logo', 'options'); if ($logo): ?>
+			                    <img src="<?php echo $logo['url']; ?>" class="img-responsive" alt="<?php echo $logo['alt']; ?>">
+			                    <?php else: ?>
+			                    <img src="<?php echo get_theme_file_uri(); ?>/images/logo.png" class="img-responsive" alt="GenCon">
+			                	<?php endif; ?>
 			                </a>
 			            </div><!-- /logo -->
 			
@@ -58,32 +62,53 @@
 	                        ));
 	                    ?>
 
+	                    <?php $social_media = get_field('social_media', 'options'); if ($social_media): ?>
 			            <ul class="social-media list-inline">
-			        		<li><a href="#" target="_blank"><i class="icon-facebook"></i></a></li>
-			        		<li><a href="#" target="_blank"><i class="icon-linkedin"></i></a></li>
-			        		<li><a href="#" target="_blank"><i class="icon-twitter"></i></a></li>
+			            	<?php foreach ($social_media as $social): ?>
+			        		<li><a href="<?php echo $social['url']; ?>" target="_blank"><i class="<?php echo $social['icon']['value']; ?>"></i></a></li>
+			            	<?php endforeach; ?>
 			        	</ul>
+	                    <?php endif; ?>
 
+	                    <?php $contacts = get_field('contacts', 'options'); if ($contacts): ?>
 			        	<ul class="contacts list-inline">
-			            	<li><a href="tel:(508) 580-4626"><i class="icon-phone"></i>(508) 580-4626</a></li>
-			            	<li><a href="mailto:info@gencondb.com"><i class="icon-envelope"></i>info@gencondb.com</a></li>
+			        		<?php if ($contacts['phone']): ?>
+			            	<li><a href="tel:<?php echo $contacts['phone']; ?>"><i class="icon-phone"></i><?php echo $contacts['phone']; ?></a></li>
+			        		<?php endif; ?>
+
+			        		<?php if ($contacts['email']): ?>
+			            	<li><a href="mailto:<?php echo $contacts['email']; ?>"><i class="icon-envelope"></i><?php echo $contacts['email']; ?></a></li>
+			        		<?php endif; ?>
 			            </ul>
+	                    <?php endif; ?>
 			        </div><!-- /navbar-collapse -->
 			    </div><!-- /container -->
 			</nav>
 		</header><!-- /header -->
-		<?php if (!is_front_page() && !is_page_template('t_about.php') && !is_page_template('t_services.php')): ?>
+		<?php 
+		$disable_header = get_field('disable_header', getPageID());
+		$header_title = get_field('page_header_title', getPageID());
+		$header_description = get_field('page_header_description', getPageID());
+		$header_background = get_field('page_header_background', getPageID());
+
+		$title = $header_title ? $header_title : get_the_title();
+		$header_bg = $header_background ? $header_background : get_theme_file_uri()."/images/banner-about.jpg";
+
+		if ($disable_header || is_single() || is_date()): ?>
 		<div class="header_gutter"></div>
 		<?php endif; ?>
 
-		<?php if (!is_home() && !is_front_page() && !is_page_template('t_contact.php') && !is_page_template('t_projects.php')): ?>
-		<section class="banner banner-about align-center-v coverbg" style="background-image: url(<?php echo get_theme_file_uri(); ?>/images/banner-about.jpg);">
+		<?php if (!is_single() && !is_date() && !$disable_header): ?>
+		<section class="banner align-center-v coverbg <?php if(is_front_page()) echo 'banner-home'; ?>" style="background-image: url(<?php echo $header_bg; ?>);">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="content text-center">
-							<h1 class="title">We Deliver Results</h1>
-							<p>At GenCon, we combine energy, innovation and proven processes to deliver exceptional results to our partners in business – every job, every day.</p>
+							<h1 class="title"><?php echo customizedtitle($title); ?></h1>
+
+							<?php if ($header_description): ?>
+							<p><?php echo $header_description; ?></p>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>

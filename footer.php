@@ -5,7 +5,11 @@
 					<div class="col-md-4 col-sm-12 col-xs-12">
 						<div class="footer-logo">
 							<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-								<img src="<?php echo get_theme_file_uri(); ?>/images/footer-logo.png" class="img-responsive" alt="">
+								<?php $footer_logo = get_field('footer_logo', 'options'); if ($footer_logo): ?>
+								<img src="<?php echo $footer_logo['url']; ?>" class="img-responsive" alt="<?php echo $footer_logo['alt']; ?>">
+								<?php else: ?>
+								<img src="<?php echo get_theme_file_uri(); ?>/images/footer-logo.png" class="img-responsive" alt="GenCon">
+								<?php endif; ?>
 							</a>
 						</div>
 
@@ -56,42 +60,52 @@
 
 					<div class="col-md-3 col-sm-4 col-xs-4 col">
 						<div class="widget widget-contact">
-							<h6 class="widget-title">Contact</h6>
+							<h6 class="widget-title"><?php _e('Contact', 'gencon'); ?></h6>
+							<?php $contacts = get_field('contacts', 'options'); if ($contacts): ?>
 							<ul class="contacts list-unstyled">
+								<?php if ($contacts['address']): ?>
 								<li class="address">
 									<div class="icon pull-left">
 										<i class="icon-map"></i>
 									</div>
-
 									<div class="text">
-										<a href="#" target="_blank">323 Manley Street <br>West Bridgewater, MA 02379</a>
+										<a href="<?php echo $contacts['google_map_url']; ?>" target="_blank"><?php echo $contacts['address']; ?></a>
 									</div>
 								</li>
+								<?php endif; ?>
+
+								<?php if ($contacts['phone']): ?>
 								<li class="phone">
 									<div class="icon pull-left">
 										<i class="icon-phone"></i>
 									</div>
-
 									<div class="text">
-										<a href="tel:(508) 580-4626">(508) 580-4626</a>
+										<a href="tel:<?php echo $contacts['phone']; ?>"><?php echo $contacts['phone']; ?></a>
 									</div>
 								</li>
+								<?php endif; ?>
+								
+								<?php if ($contacts['email']): ?>
 								<li class="email">
 									<div class="icon pull-left">
 										<i class="icon-envelope"></i>
 									</div>
 
 									<div class="text">
-										<a href="mailto:info@gencondb.com">info@gencondb.com</a>
+										<a href="mailto:<?php echo $contacts['email']; ?>"><?php echo $contacts['email']; ?></a>
 									</div>
 								</li>
+								<?php endif; ?>
 							</ul>
+							<?php endif; ?>
 
-							<ul class="social-media list-inline">
-				        		<li><a href="#" target="_blank"><i class="icon-facebook"></i></a></li>
-				        		<li><a href="#" target="_blank"><i class="icon-linkedin"></i></a></li>
-				        		<li><a href="#" target="_blank"><i class="icon-twitter"></i></a></li>
+				        	<?php $social_media = get_field('social_media', 'options'); if ($social_media): ?>
+				            <ul class="social-media list-inline">
+				            	<?php foreach ($social_media as $social): ?>
+				        		<li><a href="<?php echo $social['url']; ?>" target="_blank"><i class="<?php echo $social['icon']['value']; ?>"></i></a></li>
+				            	<?php endforeach; ?>
 				        	</ul>
+		                    <?php endif; ?>
 						</div>
 					</div><!-- /widget -->
 

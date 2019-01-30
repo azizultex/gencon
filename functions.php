@@ -11,6 +11,8 @@ if ( ! function_exists( 'gencon_setup' ) ) {
 
         /** Enable support for Post Thumbnails on posts and pages. */
         add_theme_support( 'post-thumbnails' );
+        add_image_size( 'blog-post', 737, 366, true );
+        add_image_size( 'blog-post-single', 737, 227, true );
 
         /** This theme uses wp_nav_menu() in one location. */
         register_nav_menus( array(
@@ -141,6 +143,26 @@ add_action( 'after_switch_theme', 'gforms_editor_access' );
 /*** Gravity form anchor */
 add_filter( 'gform_confirmation_anchor', '__return_false' );
 
+/*** Get all page id */ 
+function getPageID() {
+    global $post;
+    $postid = $post->ID;
+    if(is_home() && get_option('page_for_posts')) {
+        $postid = get_option('page_for_posts');
+    }
+    return $postid;
+}
+
+/*** Customized header title */
+function customizedtitle($title){
+    if(is_category() || is_author()){
+        return get_the_archive_title();
+    } else if( is_search()){
+    return sprintf( esc_html__( 'Search Results for: %s', 'shhcl' ), '<strong>' . get_search_query() . '</strong>' ); 
+    }
+    return $title;
+}
+
 /*** Limit blog text */
 function Limit_Text($text, $limit=30) {
     $array = explode( "\n", wordwrap( $text, $limit));
@@ -151,6 +173,12 @@ function form_submit_button($button, $form) {
     return "<button class='btn' id='gform_submit_button_{$form["id"]}'>{$form['button']['text']}</button>";
 }
 add_filter("gform_submit_button", "form_submit_button", 10, 2);
+
+function blogFeaturedImageTitle() {
+    remove_meta_box( 'postimagediv', 'post', 'side' );
+    add_meta_box( 'postimagediv', __( 'Featured image 737px by 366px', 'gencon' ), 'post_thumbnail_meta_box', 'post', 'side' );
+}
+add_action('do_meta_boxes', 'blogFeaturedImageTitle' );
 
 /*** Breadcrumb */
 function gencon_breadcrumb() {
