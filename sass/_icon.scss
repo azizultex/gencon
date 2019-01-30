@@ -1,0 +1,103 @@
+@font-face {
+	font-weight: 400;
+	font-style: normal;
+	font-family: 'adobe-garamond-pro', serif;
+    src: url('fonts/AdobeGaramondProRegular.eot');
+    src: url('fonts/AdobeGaramondProRegular.eot') format('embedded-opentype'),
+         url('fonts/AdobeGaramondProRegular.woff2') format('woff2'),
+         url('fonts/AdobeGaramondProRegular.woff') format('woff'),
+         url('fonts/AdobeGaramondProRegular.ttf') format('truetype'),
+         url('fonts/AdobeGaramondProRegular.svg#AdobeGaramondProRegular') format('svg');
+}
+
+@font-face {
+	font-weight: 400;
+	font-style: normal;
+	font-family: 'adobe-caslon-pro', serif;
+    src: url('fonts/AdobeCaslonProRegular.eot');
+    src: url('fonts/AdobeCaslonProRegular.eot') format('embedded-opentype'),
+         url('fonts/AdobeCaslonProRegular.woff2') format('woff2'),
+         url('fonts/AdobeCaslonProRegular.woff') format('woff'),
+         url('fonts/AdobeCaslonProRegular.ttf') format('truetype'),
+         url('fonts/AdobeCaslonProRegular.svg#AdobeCaslonProRegular') format('svg');
+}
+
+@font-face {
+	font-weight: 700;
+	font-style: normal;
+	font-family: 'adobe-caslon-pro', serif;
+    src: url('fonts/AdobeCaslonProBold.eot');
+    src: url('fonts/AdobeCaslonProBold.eot') format('embedded-opentype'),
+         url('fonts/AdobeCaslonProBold.woff2') format('woff2'),
+         url('fonts/AdobeCaslonProBold.woff') format('woff'),
+         url('fonts/AdobeCaslonProBold.ttf') format('truetype'),
+         url('fonts/AdobeCaslonProBold.svg#AdobeCaslonProBold') format('svg');
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'gencon';
+  src: url('fonts/gencon.eot?29439004');
+  src: url('fonts/gencon.eot?29439004#iefix') format('embedded-opentype'),
+       url('fonts/gencon.woff2?29439004') format('woff2'),
+       url('fonts/gencon.woff?29439004') format('woff'),
+       url('fonts/gencon.ttf?29439004') format('truetype'),
+       url('fonts/gencon.svg?29439004#gencon') format('svg');
+}
+
+[data-icon]:before {
+  font-family: "gencon";
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  // vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+ 
+ [class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "gencon";
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  // vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-right:before { content: '\e800'; }
+.icon-arrow-up:before { content: '\e801'; }
+.icon-budget:before { content: '\e802'; }
+.icon-calendar:before { content: '\e803'; }
+.icon-construction:before { content: '\e804'; }
+.icon-delivered:before { content: '\e805'; }
+.icon-design:before { content: '\e806'; }
+.icon-direction:before { content: '\e807'; }
+.icon-envelope:before { content: '\e808'; }
+.icon-experience:before { content: '\e809'; }
+.icon-facebook:before { content: '\e80a'; }
+.icon-gencon:before { content: '\e80b'; }
+.icon-labor:before { content: '\e80c'; }
+.icon-linkedin:before { content: '\e80d'; }
+.icon-map:before { content: '\e80e'; }
+.icon-phone:before { content: '\e80f'; }
+.icon-price:before { content: '\e810'; }
+.icon-quality:before { content: '\e811'; }
+.icon-safety:before { content: '\e812'; }
+.icon-sizes:before { content: '\e813'; }
+.icon-toolbox:before { content: '\e814'; }
+.icon-angle-down:before { content: '\e815'; }
+.icon-arrow-down:before { content: '\e816'; }
+.icon-arrow-logn-right:before { content: '\e817'; }
+.icon-twitter:before { content: '\f099'; }
+.icon-pinterest-circled:before { content: '\f0d2'; }
+.icon-gplus:before { content: '\f0d5'; }
+.icon-youtube:before { content: '\f167'; }
+.icon-vimeo:before { content: '\f27d'; }

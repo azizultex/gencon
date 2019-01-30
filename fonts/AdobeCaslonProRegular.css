@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'AdobeCaslonProRegular';
+    src: url('fonts/AdobeCaslonProRegular.eot');
+    src: url('fonts/AdobeCaslonProRegular.eot') format('embedded-opentype'),
+         url('fonts/AdobeCaslonProRegular.woff2') format('woff2'),
+         url('fonts/AdobeCaslonProRegular.woff') format('woff'),
+         url('fonts/AdobeCaslonProRegular.ttf') format('truetype'),
+         url('fonts/AdobeCaslonProRegular.svg#AdobeCaslonProRegular') format('svg');
+}
