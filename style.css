@@ -1012,6 +1012,55 @@ PROJECT STYLES
   color: #004A98;
 }
 
+.featured-projects {
+  padding: 0;
+}
+
+.featured-projects .section-title .title {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.additional-projects {
+  padding: 10px 0 50px;
+}
+
+.additional-projects .section-title .title {
+  padding-bottom: 20px;
+}
+
+.additional-project-item {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.additional-project-item .content .title {
+  color: #000;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.additional-project-item .content .title:hover, .additional-project-item .content .title:focus {
+  color: #004A98;
+}
+
+.additional-project-item .content .sub-title {
+  margin: 0 0 3px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.additional-project-item .content .location {
+  color: #333438;
+  font-size: 16px;
+  line-height: 22px;
+  font-family: "adobe-caslon-pro", serif;
+}
+
 .project-page {
   padding: 10px 0 0;
 }
@@ -2494,6 +2543,9 @@ MEDIA QUERIES
   .latest-projects {
     padding: 50px 0 20px;
   }
+  .additional-projects {
+    padding: 10px 0 30px;
+  }
   .project-page {
     padding: 0;
   }
@@ -2662,6 +2714,9 @@ MEDIA QUERIES
 	***********************************/
   .latest-projects {
     padding: 40px 0 10px;
+  }
+  .additional-projects {
+    padding: 0 0 10px;
   }
   .highlights {
     padding-top: 30px;

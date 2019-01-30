@@ -799,6 +799,64 @@ PROJECT STYLES
 	}
 }
 
+.featured-projects {
+	padding: 0;
+
+	.section-title {
+
+		.title {
+		    padding-bottom: 20px;
+		    margin-bottom: 20px;
+		}
+	}
+}
+
+.additional-projects {
+	padding: 10px 0 50px;
+
+	.section-title {
+
+		.title {
+		    padding-bottom: 20px;
+		}
+	}
+}
+
+.additional-project-item {
+	display: block;
+	margin-bottom: 30px;
+
+	.content {
+
+		.title {
+			color: $black;
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 24px;
+			letter-spacing: 0;
+
+			&:hover, &:focus {
+				color: $base;
+			}
+		}
+
+		.sub-title {
+			margin: 0 0 3px;
+			font-size: 16px;
+			font-weight: 700;
+			line-height: 24px;
+			font-family: $mont;
+		}
+
+		.location {
+			color: #333438;
+			font-size: 16px;
+			line-height: 22px;
+			font-family: $caslon;
+		}
+	}
+}
+
 .project-page {
 	padding: 10px 0 0;
 
