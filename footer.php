@@ -36,27 +36,40 @@
 						</div>
 					</div><!-- /widget -->
 
-					<div class="col-md-2 col-sm-3 col-xs-3 col">
+					<div class="col-md-2 col-sm-3 col-xs-3 col pr-0">
 						<div class="widget widget-services">
-							<h6 class="widget-title">Services</h6>
-							<ul class="list-unstyled">
-								<li><a href="#">Design Build</a></li>
-								<li><a href="#">Construction Management</a></li>
-								<li><a href="#">General Contracting & Consulting</a></li>
-								<li><a href="#">GenCon Services, Inc.</a></li>
-							</ul>
+							<h6 class="widget-title"><?php _e('Services', 'gencon'); ?></h6>
+							<?php 
+						  		wp_nav_menu( array(
+		                            'menu'               => 'Footer Services',
+		                            'theme_location'     => 'menu-3',
+		                            'depth'              => 2,
+		                            'container'          => 'false',
+		                            'menu_class'         => 'list-unstyled',
+		                            'menu_id'            => '',
+		                            'fallback_cb'        => 'wp_bootstrap_navwalker::fallback',
+		                            'walker'             => new wp_bootstrap_navwalker(),
+		                        ));
+		                    ?>
 						</div>
 					</div><!-- /widget -->
 
+					<?php $about_menu = get_field('about_menu', 'options'); if ($about_menu): ?>
 					<div class="col-md-2 col-sm-3 col-xs-3 col">
 						<div class="widget widget-about">
-							<h6 class="widget-title">About Us</h6>
+							<h6 class="widget-title"><?php _e('About Us', 'gencon'); ?></h6>
 							<ul class="list-unstyled">
-								<li><a href="#">Our Company</a></li>
-								<li><a href="#">Meet the Team</a></li>
+								<?php foreach ($about_menu as $about): ?>
+									<?php if ($about['link_type'] == 'internal_link'): ?>
+									<li><a href="<?php echo $about['url_internal']; ?>"><?php echo $about['text']; ?></a></li>
+									<?php elseif($about['link_type'] == 'external_link'): ?>
+									<li><a href="<?php echo $about['url_external']; ?>"><?php echo $about['text']; ?></a></li>
+									<?php endif; ?>
+								<?php endforeach; ?>
 							</ul>
 						</div>
 					</div><!-- /widget -->
+					<?php endif; ?>
 
 					<div class="col-md-3 col-sm-4 col-xs-4 col">
 						<div class="widget widget-contact">

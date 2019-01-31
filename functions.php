@@ -13,11 +13,13 @@ if ( ! function_exists( 'gencon_setup' ) ) {
         add_theme_support( 'post-thumbnails' );
         add_image_size( 'blog-post', 737, 366, true );
         add_image_size( 'blog-post-single', 737, 227, true );
+        add_image_size( 'project-single', 737, 405, true );
 
         /** This theme uses wp_nav_menu() in one location. */
         register_nav_menus( array(
-          'menu-1' => esc_html__( 'Primary menu', 'gencon' ),
-          'menu-2' => esc_html__( 'Footer menu', 'gencon' ),
+          'menu-1' => esc_html__( 'Primary Menu', 'gencon' ),
+          'menu-2' => esc_html__( 'Footer Menu', 'gencon' ),
+          'menu-3' => esc_html__( 'Footer Services', 'gencon' ),
         ) );
 
     }
@@ -66,6 +68,8 @@ function reorder_admin_menu( $__return_true ) {
         'acf-options',               // ACF Theme Settings
         'edit.php?post_type=page',   // Pages 
         'edit.php',                  // Posts
+        'edit.php?post_type=service',   // Pages 
+        'edit.php?post_type=project',   // Pages 
         'separator2',                // --Space--
         'gf_edit_forms',             // Gravity Forms
         'upload.php',                // Media
@@ -84,15 +88,38 @@ add_filter( 'menu_order', 'reorder_admin_menu' );
 
 /*** Remove dashboard menu */
 function remove_admin_menus() {
-    remove_menu_page( 'edit.php' );              // Comments
+    // remove_menu_page( 'edit.php' );              // Comments
     remove_menu_page( 'edit-comments.php' );              // Comments
-    remove_menu_page( 'tools.php' );                      // Tools
-    remove_menu_page( 'plugins.php' );                    // Plugings
+    // remove_menu_page( 'tools.php' );                      // Tools
+    // remove_menu_page( 'plugins.php' );                    // Plugings
     remove_menu_page( 'sharethis-general' );          // share this
     remove_menu_page( 'edit.php?post_type=acf-field-group' ); // Custom Field 
     remove_menu_page( 'pods' );                         // Pods Custom post type
 }
-//add_action( 'admin_menu', 'remove_admin_menus', 999);
+add_action( 'admin_menu', 'remove_admin_menus', 999);
+
+/*** ACF not working use jquery */
+function hide_editor_custom_js() {
+    echo '<script type="text/javascript">
+            jQuery(document).ready(function(){
+                jQuery("#page_template").change( function() {
+                    jQuery("#_home_page_options").hide();
+                    jQuery("#postdivrich").show();
+                    switch( jQuery( this ).val() ) {
+                        case "t_home.php":
+                          jQuery("#_home_page_options").show();
+                          jQuery("#postdivrich").hide();
+                        break;
+                        case "t_services.php":
+                          jQuery("#_home_page_options").show();
+                          jQuery("#postdivrich").hide();
+                        break;
+                    }
+                }).change();
+            });
+        </script>';
+}
+add_action('admin_head', 'hide_editor_custom_js');
 
 /*** GC Color Theme */
 function additional_admin_color_schemes() {
@@ -149,6 +176,8 @@ function getPageID() {
     $postid = $post->ID;
     if(is_home() && get_option('page_for_posts')) {
         $postid = get_option('page_for_posts');
+    }else {
+        $postid = get_post_type('service');
     }
     return $postid;
 }
@@ -169,6 +198,21 @@ function Limit_Text($text, $limit=30) {
     return $array['0'];
 }
 
+// get permalink by template name
+function get_template_link($temp){
+    $link = null;
+    $pages = get_pages(
+        array(
+            'meta_key' => '_wp_page_template',
+            'meta_value' => $temp
+        )
+    );
+    if(isset($pages[0])){
+        $link = get_page_link($pages[0]->ID);
+    }
+    return $link;
+}
+
 function form_submit_button($button, $form) {
     return "<button class='btn' id='gform_submit_button_{$form["id"]}'>{$form['button']['text']}</button>";
 }
@@ -179,6 +223,18 @@ function blogFeaturedImageTitle() {
     add_meta_box( 'postimagediv', __( 'Featured image 737px by 366px', 'gencon' ), 'post_thumbnail_meta_box', 'post', 'side' );
 }
 add_action('do_meta_boxes', 'blogFeaturedImageTitle' );
+
+function serviceFeaturedImageTitle() {
+    remove_meta_box( 'postimagediv', 'service', 'side' );
+    add_meta_box( 'postimagediv', __( 'Featured image 737px by 406px', 'gencon' ), 'post_thumbnail_meta_box', 'service', 'side' );
+}
+add_action('do_meta_boxes', 'serviceFeaturedImageTitle' );
+
+function projectFeaturedImageTitle() {
+    remove_meta_box( 'postimagediv', 'project', 'side' );
+    add_meta_box( 'postimagediv', __( 'Featured image 737px by 656px', 'gencon' ), 'post_thumbnail_meta_box', 'project', 'side' );
+}
+add_action('do_meta_boxes', 'projectFeaturedImageTitle' );
 
 /*** Breadcrumb */
 function gencon_breadcrumb() {
@@ -216,7 +272,7 @@ function gencon_breadcrumb() {
     echo $before . single_cat_title('', false) . $after;
 
     } elseif ( is_day() ) {
-
+      echo '<a href="' . $blogLink . '">'.$blogTitle.'</a> ' . $delimiter . ' ';
       echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> ' . $delimiter . ' ';
       echo '<a href="' . get_month_link(get_the_time('Y'),get_the_time('m')) . '">' . get_the_time('F') . '</a> ' . $delimiter . ' ';
       echo $before . get_the_time('d') . $after;

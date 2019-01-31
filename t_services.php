@@ -6,17 +6,28 @@ get_header(); ?>
 	
 	<div id="primary" class="content-area">
 
+		<?php 
+			$args = array(
+				'post_type' => 'service',
+				'posts_per_page' => -1,
+			);
+			$loop = new WP_Query( $args );
+			if ($loop->have_posts()) :
+		?>
 		<section class="services-page">
 			<div class="container">
 				<div class="row eq-height justify-content-center">
+					<?php while ($loop->have_posts()) : $loop->the_post(); $service = get_field('service'); ?>
 					<div class="col-md-2 col-sm-3 col-xs-4 col">
-						<a class="service-item text-center" href="single-service.html">
+						<a id="service-<?php the_ID(); ?>" <?php post_class('service-item text-center'); ?> href="<?php the_permalink(); ?>">
+							<?php if ($service['icon']): ?>
 							<div class="icon">
-								<i class="icon-design"></i>
+								<i class="<?php echo $service['icon']; ?>"></i>
 							</div>
+							<?php endif; ?>
 
 							<div class="text">
-								<h6>Design Build</h6>
+								<h6><?php the_title(); ?></h6>
 							</div>
 
 							<div class="arrow">
@@ -24,89 +35,11 @@ get_header(); ?>
 							</div>
 						</a>
 					</div><!-- /service-item -->
-
-					<div class="col-md-2 col-sm-3 col-xs-4 col">
-						<a class="service-item text-center" href="single-service.html">
-							<div class="icon">
-								<i class="icon-construction"></i>
-							</div>
-
-							<div class="text">
-								<h6>Construction Management</h6>
-							</div>
-
-							<div class="arrow">
-								<i class="icon-arrow-right"></i>
-							</div>
-						</a>
-					</div><!-- /service-item -->
-
-					<div class="col-md-2 col-sm-3 col-xs-4 col">
-						<a class="service-item text-center" href="single-service.html">
-							<div class="icon">
-								<i class="icon-labor"></i>
-							</div>
-
-							<div class="text">
-								<h6>General Contracting & Consulting</h6>
-							</div>
-
-							<div class="arrow">
-								<i class="icon-arrow-right"></i>
-							</div>
-						</a>
-					</div><!-- /service-item -->
-
-					<div class="col-md-2 col-sm-3 col-xs-4 col">
-						<a class="service-item text-center" href="single-service.html">
-							<div class="icon">
-								<i class="icon-direction"></i>
-							</div>
-
-							<div class="text">
-								<h6>Owner’s Representation</h6>
-							</div>
-
-							<div class="arrow">
-								<i class="icon-arrow-right"></i>
-							</div>
-						</a>
-					</div><!-- /service-item -->
-
-					<div class="col-md-2 col-sm-3 col-xs-4 col">
-						<a class="service-item text-center" href="single-service.html">
-							<div class="icon">
-								<i class="icon-gencon"></i>
-							</div>
-
-							<div class="text">
-								<h6>GenCon Service, Inc.</h6>
-							</div>
-
-							<div class="arrow">
-								<i class="icon-arrow-right"></i>
-							</div>
-						</a>
-					</div><!-- /service-item -->
-
-					<div class="col-md-2 col-sm-3 col-xs-4 col">
-						<a class="service-item text-center" href="single-service.html">
-							<div class="icon">
-								<i class="icon-toolbox"></i>
-							</div>
-
-							<div class="text">
-								<h6>GeniPM</h6>
-							</div>
-
-							<div class="arrow">
-								<i class="icon-arrow-right"></i>
-							</div>
-						</a>
-					</div><!-- /service-item -->
+					<?php endwhile; ?>
 				</div>
 			</div>
 		</section><!-- /services -->
+		<?php endif; wp_reset_postdata(); ?>
 
 	</div><!-- /content-area -->
 

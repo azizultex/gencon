@@ -901,9 +901,19 @@ SERVICES STYLES
   margin-right: 10px;
 }
 
+.services-page .plr-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .services-page .media {
   margin-bottom: 20px;
   border-radius: 12px;
+}
+
+.services-page .media img {
+  width: 100%;
+  height: auto;
 }
 
 .services-page .content h2, .services-page .content h3, .services-page .content h4, .services-page .content h5, .services-page .content h6 {
@@ -977,7 +987,7 @@ SERVICES STYLES
 .service-item .text h6 {
   color: #FFF;
   margin: 0 auto;
-  max-width: 130px;
+  max-width: 150px;
 }
 
 .service-item .arrow {
@@ -1331,7 +1341,7 @@ PROJECT STYLES
 
 .all-projects {
   padding: 40px 0;
-  background: #FAFAFA url(../images/shape.png) repeat-y left top;
+  background: #FAFAFA url(images/shape.png) repeat-y left top;
   background-size: 100%;
 }
 
@@ -2176,6 +2186,10 @@ FOOTER STYLES
   padding-left: 0;
 }
 
+.footer .pr-0 {
+  padding-right: 0;
+}
+
 .footer .widget {
   margin-left: 20px;
   margin-bottom: 30px;
@@ -2261,7 +2275,7 @@ FOOTER STYLES
 }
 
 .error404 .error-404 {
-  padding: 40px 0;
+  padding: 0 0 50px;
 }
 
 .error404 .error-404 .page-header {
@@ -2314,6 +2328,22 @@ FOOTER STYLES
   outline: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+/***********************************
+404 STYLES
+***********************************/
+.default-page-content h1, .default-page-content h2, .default-page-content h3, .default-page-content h4, .default-page-content h5, .default-page-content h6 {
+  margin-bottom: 10px;
+}
+
+.default-page-content ul {
+  margin: 30px 0;
+  margin-left: 20px;
+}
+
+.default-page-content ul li {
+  margin-bottom: 10px;
 }
 
 /***********************************
@@ -2870,6 +2900,9 @@ MEDIA QUERIES
   }
   .footer .pl-0 {
     padding-left: 15px;
+  }
+  .footer .pr-0 {
+    padding-right: 15px;
   }
   .footer .footer-logo {
     margin-bottom: 40px;

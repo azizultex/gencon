@@ -94,11 +94,11 @@
 		$title = $header_title ? $header_title : get_the_title();
 		$header_bg = $header_background ? $header_background : get_theme_file_uri()."/images/banner-about.jpg";
 
-		if ($disable_header || is_single() || is_date()): ?>
+		if ($disable_header || is_singular('post') || is_date() || is_404() || is_singular('project')): ?>
 		<div class="header_gutter"></div>
 		<?php endif; ?>
 
-		<?php if (!is_single() && !is_date() && !$disable_header): ?>
+		<?php if (!is_singular('post') && !is_singular('project') && !is_404() && !is_date() && !$disable_header): ?>
 		<section class="banner align-center-v coverbg <?php if(is_front_page()) echo 'banner-home'; ?>" style="background-image: url(<?php echo $header_bg; ?>);">
 			<div class="container">
 				<div class="row">
@@ -114,6 +114,10 @@
 				</div>
 			</div>
 		</section><!-- /banner -->
+		<?php endif; ?>
+
+		<?php if (is_singular('service')): ?>
+		<a id="primary" class="blankSpace"></a>
 		<?php endif; ?>
 
 		<?php if (!is_front_page()): ?>

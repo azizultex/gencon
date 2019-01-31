@@ -9,48 +9,47 @@ get_header(); ?>
 		<section class="contact">
 			<div class="container">
 				<div class="row">
+					<?php $contact = get_field('contact_us'); if ($contact): ?>
 					<div class="col-md-6 col-sm-12 col-xs-12">
+						<?php if ($contact['title'] || $contact['description']): ?>
 						<div class="section-title">
-							<h1 class="title">Get in Touch</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend, elit at luctus sodales.</p>
-						</div>
+							<?php if ($contact['title']): ?>
+							<h1 class="title"><?php echo $contact['title']; ?></h1>
+							<?php endif; ?>
 
+							<?php echo $contact['description']; ?>
+						</div>
+						<?php endif; ?>
+
+						<?php if ($contact['office']): ?>
 						<div class="row eq-height">
+							<?php foreach ($contact['office'] as $office): ?>
 							<div class="col-md-6 col-sm-6 col-xs-6 col">
 								<div class="office-location">
-									<h5 class="name">Corporate HQ</h5>
-									<p><a href="#" target="_blank">323 Manley Street <br>West Bridgewater, MA 02379</a></p>
-									<p>Phone: <a href="tel:(508) 580-4626">(508) 580-4626</a></p>
-								</div>
-							</div><!-- /office-location -->
+									<?php if ($office['title']): ?>
+									<h5 class="name"><?php echo $office['title']; ?></h5>
+									<?php endif; ?>
 
-							<div class="col-md-6 col-sm-6 col-xs-6 col">
-								<div class="office-location">
-									<h5 class="name">Cape Cod</h5>
-									<p><a href="#" target="_blank">802 MacArthur Boulevard <br>Pocasset, MA 02559</a></p>
-								</div>
-							</div><!-- /office-location -->
+									<?php if ($office['address']): ?>
+									<p><a href="<?php echo $office['google_map_address']; ?>" target="_blank"><?php echo $office['address']; ?></a></p>
+									<?php endif; ?>
 
-							<div class="col-md-6 col-sm-6 col-xs-6 col">
-								<div class="office-location">
-									<h5 class="name">South Boston</h5>
-									<p><a href="#" target="_blank">11 Elkins Street, Suite 460 <br>South Boston, MA 02127</a></p>
+									<?php if ($office['phone']): ?>
+									<p>Phone: <a href="tel:<?php echo $office['phone']; ?>"><?php echo $office['phone']; ?></a></p>
+									<?php endif; ?>
 								</div>
 							</div><!-- /office-location -->
-
-							<div class="col-md-6 col-sm-6 col-xs-6 col">
-								<div class="office-location">
-									<h5 class="name">North Shore</h5>
-									<p><a href="#" target="_blank">33 Lawrence Street <br>Methuen, MA 01844</a></p>
-								</div>
-							</div><!-- /office-location -->
+							<?php endforeach; ?>
 						</div>
-						
+						<?php endif; ?>
 					</div>
+					<?php endif; ?>
 
 					<div class="col-md-6 col-sm-12 col-xs-12">
 						<div class="contact-form">
-							<h5>We look forward to Hearing from you.</h5>
+							<?php if ($contact['form_title']): ?>
+							<h5><?php echo $contact['form_title']; ?></h5>
+							<?php endif; ?>
 
 							<?php echo do_shortcode('[gravityform id="1" title="false" description="false" tabindex="10" ajax="false"]'); ?>
 						</div>
@@ -59,25 +58,25 @@ get_header(); ?>
 			</div>
 		</section><!-- /contact -->
 
+		<?php $career = get_field('career'); if ($career): ?>
 		<section class="career">
 			<div class="container">
 				<div class="row">
+					<?php foreach ($career as $car): ?>
 					<div class="col-md-6 col-sm-6 col-xs-6 col">
 						<div class="content">
-							<h3 class="title">Join Our Team</h3>
-							<p>GenCon is one of the fastest growing private companies in the northeast! We are always looking for talented, motivated, honest individuals to join our team. If you have interest in our company, we invite you to submit your resume for review.</p>
-						</div>
-					</div>
+							<?php if ($car['title']): ?>
+							<h3 class="title"><?php echo $car['title']; ?></h3>
+							<?php endif; ?>
 
-					<div class="col-md-6 col-sm-6 col-xs-6 col">
-						<div class="content">
-							<h3 class="title">Subcontractors</h3>
-							<p>GenCon prequalifies all of our subcontractors to ensure that we provide the best quality work for our clients. If you are interested in becoming part of the GenCon team, <a href="#">please click here</a> to download our Prequalification Application. Once complete, please return via email to : <a href="mailto:info@gencondb.com">info@gencondb.com</a></p>
+							<?php echo $car['content']; ?>
 						</div>
 					</div>
+					<?php endforeach; ?>
 				</div>
 			</div>
 		</section><!-- /quick-contact -->
+		<?php endif; ?>
 
 	</div><!-- /content-area -->
 

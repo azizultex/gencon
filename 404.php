@@ -12,6 +12,8 @@
 
 						<div class="page-content">
 							<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'gencon' ); ?></p>
+
+							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn text-uppercase">Go Home</a>
 						</div><!-- .page-content -->
 					</section><!-- .error-404 -->
 				</div>

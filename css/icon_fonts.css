@@ -23,7 +23,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
  
- [class^="icon-"]:before, [class*=" icon-"]:before {
+ [class^="icon-"]:before, [class*=" icon-"]:before, .dashicons-services:before, .dashicons-price:before {
   font-family: "gencon";
   font-style: normal !important;
   font-weight: normal !important;
@@ -65,3 +65,6 @@
 .icon-gplus:before { content: '\f0d5'; }
 .icon-youtube:before { content: '\f167'; }
 .icon-vimeo:before { content: '\f27d'; }
+
+.dashicons-services:before { content: '\e804'; }
+.dashicons-price:before { content: '\e810'; }
